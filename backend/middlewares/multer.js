@@ -1,20 +1,17 @@
 
-// import bodyParser from "body-parser";
-// import express from "express";
-import multer from "multer";
-// const app = express()
 
-// app.use(bodyParser.urlencoded({extended: true}));
-// app.use(bodyParser.json());
+import multer from 'multer';
+import path from 'path';
 
-//disc storage 
+// Configure multer storage
 const storage = multer.diskStorage({
-    filename: function(req, file, callback){
-        callback(null, file.originalname)
-    }
+    
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Add timestamp to the file name
+    },
+});
 
-})
+// Initialize multer with the storage configuration
+const upload = multer({ storage });
 
-const upload = multer({ storage:storage})
-
-export default upload
+export default upload;
