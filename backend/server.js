@@ -9,7 +9,7 @@ import adminRouter from './routes/adminRoute.js'
 
 //app config
 const app = express()
-app.set("views", path.resolve("./views"));
+
 const port = process.env.PORT || 4000
 connectDB()
 

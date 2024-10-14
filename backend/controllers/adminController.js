@@ -14,7 +14,7 @@ const addDoctor = async (req, res) => {
         
     
     
-        const imageFile = req.files;
+        const imageFile = req.file;
         
 
         //checking for all data to add doctor 
@@ -39,10 +39,25 @@ const addDoctor = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt)
 
 
+        // // upload img to cloudinary   
+      
+        // const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type: "image"})
+        // const imageUrl = imageUpload.secure_url;
+
+        
         // upload img to cloudinary   
       
-        const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type: "image"})
-        const imageUrl = imageUpload.secure_url;
+        let imageUrl; // Declare the imageUrl variable
+
+        if (imageFile) {
+            // Upload img to Cloudinary only if an image file is present
+            const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" });
+            imageUrl = imageUpload.secure_url;
+        } 
+        else {
+            // Use a default image URL if no image is provided
+            imageUrl = "https://example.com/path/to/default-image.png"; // Replace with your actual default image URL
+        }
 
 
         const doctorData = {
