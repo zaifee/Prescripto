@@ -1,12 +1,13 @@
 import {v2 as cloudniary} from 'cloudinary'
-import { connect } from 'mongoose'
+import fs from 'fs'
 
 const connectCloudinary = () => {
 
-    cloudinary.config({
+    cloudniary.config({
         cloud_name: process.env.CLOUDINARY_NAME,
         api_key: process.env.CLOUDINARY_APIKEY,
-        api_secretkey: process.env.CLOUDINARY_SECRETKEY
+        // api_secretkey: process.env.CLOUDINARY_SECRETKEY
+        api_secret: process.env.CLOUDINARY_SECRETKEY
 
     })
 }
