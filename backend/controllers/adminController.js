@@ -12,9 +12,15 @@ const addDoctor = async (req, res) => {
         const {name, email, password, speciality, degree, experience, about, fee, address} = req.body
         // we will pass data in the form of form so we need a middleware
         
+<<<<<<< HEAD
         const imageFile = req.file;
         // console.log("value of imageFile is: ", imageFile);
 
+=======
+    
+    
+        const imageFile = req.file; // used file instead of files because one image is send at a time.
+>>>>>>> fdcd8606e0b6bf3c36c7aa47e322223ebdcaffeb
         
 
         //checking for all data to add doctor 
@@ -51,6 +57,18 @@ const addDoctor = async (req, res) => {
         // ----------so Using default image-------------------------
       
         let imageUrl; // Declare the imageUrl variable
+<<<<<<< HEAD
+=======
+
+        if (imageFile) {
+            // Upload img to Cloudinary only if an image file is present
+            const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" });
+            imageUrl = imageUpload.secure_url;
+        } else {
+            // Use a default image URL if no image is provided
+            imageUrl = "https://example.com/path/to/default-image.png"; // Replace with your actual default image URL
+        }
+>>>>>>> fdcd8606e0b6bf3c36c7aa47e322223ebdcaffeb
 
         if (imageFile) {
             // Upload img to Cloudinary only if an image file is present
@@ -95,6 +113,7 @@ const addDoctor = async (req, res) => {
     }
 }
 
+<<<<<<< HEAD
 
 // // API FOR ADMIN LOGIN 
 const loginAdmin = async(req, res) => {
@@ -141,3 +160,6 @@ const allDoctors = async(req, res) => {
 
 
 export {addDoctor, loginAdmin, allDoctors}
+=======
+export {addDoctor}
+>>>>>>> fdcd8606e0b6bf3c36c7aa47e322223ebdcaffeb
